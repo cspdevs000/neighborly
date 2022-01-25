@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Vilkommen to home page</h1>
+  <p>{{ building.number_of_apts }}</p>
+  {% if building_list %}
+      <ul>
+      {% for building in building_list %}
+          <li><a href="/building/{{ building.id }}/">{{ building.address }}</a></li>
+      {% endfor %}
+      </ul>
+  {% else %}
+      <p>No buildings are available.</p>
+  {% endif %}
+{% endblock %}

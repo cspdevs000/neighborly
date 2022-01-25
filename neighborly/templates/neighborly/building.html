@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Building PAGE</h1>
+    <h1>{{ building.address }}</h1>
+    <h2>{{ building.number_of_apts }}</h2>
+    <ul>
+        {% for post in building.post_set.all %}
+            <li>Post by {{ post.user }}: {{ post.body }} ({{post.pub_date}})</li>
+            <ul>
+            {% for reply in post.reply_set.all %}
+            <li>Reply by {{ reply.user }}: {{ reply.body }} ({{ reply.pub_date }})</li>  
+            {% endfor %}
+            </ul>
+        {% endfor %}
+    </ul>
+{% endblock %}
