@@ -2,8 +2,12 @@
 
 {% block content %}
   <h1>Vilkommen to home page</h1>
-  <p>{{ building.number_of_apts }}</p>
-  {% if building_list %}
+  {% if building %}
+  <p><a href="/building/{{ building.id }}/">{{ building.address }}</a></p>
+  {% else %}
+  <p>You are currently not registered to one of our buildings</p>
+  {% endif %}
+  {% comment %} {% if building_list %}
       <ul>
       {% for building in building_list %}
           <li><a href="/building/{{ building.id }}/">{{ building.address }}</a></li>
@@ -11,5 +15,5 @@
       </ul>
   {% else %}
       <p>No buildings are available.</p>
-  {% endif %}
+  {% endif %} {% endcomment %}
 {% endblock %}

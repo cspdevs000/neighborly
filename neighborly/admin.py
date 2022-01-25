@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Building, Post, Reply
+from .models import Building, Post, Reply, ExtendUser
+from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 class BuildingAdmin(admin.ModelAdmin):
     fields = ['address', 'number_of_apts']
@@ -12,3 +14,13 @@ admin.site.register(Post, PostAdmin)
 class ReplyAdmin(admin.ModelAdmin):
     fields = ['user', 'post', 'body', 'pub_date']
 admin.site.register(Reply, ReplyAdmin)
+
+class ExtendUserInline(admin.StackedInline):
+    model = ExtendUser
+    can_delete = False
+    verbose_name_plural = 'extendUser'
+
+class UserAdmin(BaseUserAdmin):
+    inlines = (ExtendUserInline,)
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)

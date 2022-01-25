@@ -5,7 +5,7 @@
     <h1>{{ building.address }}</h1>
     <h2>{{ building.number_of_apts }}</h2>
     <ul>
-        {% for post in building.post_set.all %}
+        {% for post in post_list %}
             <li>Post by {{ post.user }}: {{ post.body }} ({{post.pub_date}})</li>
             <ul>
             {% for reply in post.reply_set.all %}
@@ -14,4 +14,9 @@
             </ul>
         {% endfor %}
     </ul>
+    <form action='' method='POST'>
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">submit</button>
+    </form>
 {% endblock %}
