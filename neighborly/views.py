@@ -19,13 +19,11 @@ def building(request, building_id):
 
 
 #todo
-#figure out how to use built in user model to app's models
-#or figure out how to make created user model reflect auth
-
 #make homepage / login screen
 #add building search to home page
+#add post and reply forms to buildings page
 #add request to be added to building button
-#only display building info if user is confirmed
+#only display building info for user, if user is confirmed
 #add send invitation functionality for building admin
 
 #style home page
