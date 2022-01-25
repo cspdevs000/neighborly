@@ -32,29 +32,6 @@ def home(request):
         }
         return render(request, 'neighborly/home.html', context)
 
-# def building(request, building_id):
-#     building = get_object_or_404(Building, pk=building_id)
-#     posts = Post.objects.all().order_by('-pub_date')
-#     form = PostForm()
-
-#     context = {
-#         'building': building,
-#         'post_list': posts,
-#         'form': form,
-#     }
-
-#     return render(request, 'neighborly/building.html', context)
-
-# def buildingpost(request):
-#     if request.method == "POST":
-#         form = PostForm(request.POST)
-#         if form.is_valid():
-#             return HttpResponseRedirect('neighborly/building.html')
-
-#     else:
-#         form = PostForm()
-#     return render(request, 'neighborly/building.html', {'form': form})
-
 class PostView(View):
     def get(self, request, building_id, *args, **kwargs):
         building = get_object_or_404(Building, pk=building_id)
@@ -87,31 +64,11 @@ class PostView(View):
 
         return render(request, 'neighborly/building.html', context)
 
-# def buildingpost(request):
-#     if request.method == 'POST':
-#         form = PostForm(request.POST)
-#         if form.is_valid():
-#             Post.body = form.cleaned_data['body']
-#             Post.user = request.user
-#             Post.save()
-#             return HttpResponseRedirect('building/<int:building_id>/')
-
-
-# def buildingpost(request):
-#   if request.method == "POST":
-#     if request.POST.get('body'):
-#         post = Post()
-#         post.body = request.POST.get('body')
-#         print('FORM ---->', post.body)
-#         post.save()
-#     return HttpResponseRedirect('building/<int:building_id>/')
-
 
 #todo
 #add building search to home page
-#add post and reply forms to buildings page
+#add reply form to buildings page
 #add request to be added to building button
-#make posts building-specific
 #add send invitation functionality for building admin
 
 #style home page
