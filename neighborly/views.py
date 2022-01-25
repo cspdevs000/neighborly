@@ -32,30 +32,60 @@ def home(request):
         }
         return render(request, 'neighborly/home.html', context)
 
-def building(request, building_id):
-    building = get_object_or_404(Building, pk=building_id)
-    posts = Post.objects.all().order_by('-pub_date')
-    form = PostForm()
+# def building(request, building_id):
+#     building = get_object_or_404(Building, pk=building_id)
+#     posts = Post.objects.all().order_by('-pub_date')
+#     form = PostForm()
 
-    context = {
-        'building': building,
-        'post_list': posts,
-        'form': form,
-    }
+#     context = {
+#         'building': building,
+#         'post_list': posts,
+#         'form': form,
+#     }
 
-    return render(request, 'neighborly/building.html', context)
+#     return render(request, 'neighborly/building.html', context)
 
-def buildingpost(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            return HttpResponseRedirect('neighborly/building.html')
+# def buildingpost(request):
+#     if request.method == "POST":
+#         form = PostForm(request.POST)
+#         if form.is_valid():
+#             return HttpResponseRedirect('neighborly/building.html')
 
-    else:
+#     else:
+#         form = PostForm()
+#     return render(request, 'neighborly/building.html', {'form': form})
+
+class PostView(View):
+    def get(self, request, building_id, *args, **kwargs):
+        building = get_object_or_404(Building, pk=building_id)
+        posts = Post.objects.filter(building = building_id).order_by('-pub_date')
         form = PostForm()
 
-    return render(request, 'neighborly/building.html', {'form': form})
+        context = {
+            'building': building,
+            'post_list': posts,
+            'form': form,
+        }
 
+        return render(request, 'neighborly/building.html', context)
+
+    def post(self, request, building_id, *args, **kwargs):
+        building = get_object_or_404(Building, pk=building_id)
+        posts = Post.objects.filter(building = building_id).order_by('-pub_date')
+        form = PostForm(request.POST)
+
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.user = request.user
+            new_post.building = building
+            new_post.save()
+
+        context = {
+            'post_list': posts,
+            'form': form,
+        }
+
+        return render(request, 'neighborly/building.html', context)
 
 # def buildingpost(request):
 #     if request.method == 'POST':
