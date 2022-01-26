@@ -6,7 +6,10 @@
 <br />
 <ul>
 {% for result in results%}
-    <li>{{ result }}, {{ result.city }}, {{ result.state }}</li>
+<div class='d-flex justify-content-center p-3'>
+    <li class='col absolute'>{{ result }}, {{ result.city }}, {{ result.state }}</li>
+    <a href="" class="col absolute btn btn-dark p-1">Request to join this building</a>
+</div>
 {% endfor %}
 </ul>
 {% else %}

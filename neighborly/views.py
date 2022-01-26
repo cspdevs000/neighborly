@@ -114,7 +114,6 @@ class ReplyView(View):
 
 #todo
 #add send invitation functionality for building admin
-#add building search to home page
 #if search comes up empty, prompt user to add building
 #add request to be added to building function
 #pinned posts
