@@ -25,6 +25,17 @@ def home(request):
         }
         return render(request, 'neighborly/home.html', context)
 
+def search(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        context = {
+            'searched': searched
+        }
+        return render(request, 'neighborly/search.html', context)
+    else:
+        return render(request, 'neighborly/search.html')
+
+
 class AddBuilding(View):
     def get(self, request, *args, **kwargs):
         buildingform = BuildingForm()
@@ -100,12 +111,10 @@ class ReplyView(View):
 
 
 #todo
-#add building form page with cooresponding button on home page
 #add send invitation functionality for building admin
-#add city and state to building model
 #add building search to home page
 #if search comes up empty, prompt user to add building
-#add request to be added to building button
+#add request to be added to building function
 #pinned posts
 
 #style home page

@@ -9,7 +9,16 @@
         <a href="/building/{{ building.id }}/">{{ building.address }}</a>
     </h3>
   {% else %}
-    <h3>You are currently not registered to one of our buildings</h3>
-    <h4>Search for your building below...</h4>
+    <div class='flex justify-content-center mt-5'>
+      <h3>You are currently not registered to one of our buildings</h3>
+      <p>Add your building to our database below to start connecting with your neighbors.</p>
+      <div class='d-flex justify-content-center mt-5'>
+      <a href="{% url 'addbuilding'%}" class="btn btn-dark mr-2" id="add-building-button">Add your building</a>
+      </div>
+      <br /><br />
+    </div>
+    <div class=''>
+    <h3>Search for your building below...</h3>
+    </div>
   {% endif %}
 {% endblock %}

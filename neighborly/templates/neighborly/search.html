@@ -1,0 +1,10 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+{% if searched %}
+<h1>You searched for... {{ searched }}</h1>
+
+{% else %}
+<h1>search failed</h1>
+{% endif %}
+{% endblock content %}
