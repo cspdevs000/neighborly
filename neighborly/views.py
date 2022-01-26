@@ -2,7 +2,7 @@ from django.http import Http404, HttpResponseRedirect, HttpResponse, HttpRespons
 from django.shortcuts import get_object_or_404, render
 from .models import Building, ExtendUser, Post, Reply
 from django.contrib.auth.models import User
-from neighborly.forms import PostForm, ReplyForm
+from neighborly.forms import PostForm, ReplyForm, BuildingForm
 from django.views import View
 
 def index(request):
@@ -24,6 +24,14 @@ def home(request):
             'user': current_user,
         }
         return render(request, 'neighborly/home.html', context)
+
+def addbuilding(request):
+    buildingform = BuildingForm()
+    context = {
+        'buildingform': buildingform
+    }
+    return render(request, 'neighborly/addbuilding.html', context)
+
 
 class PostView(View):
     def get(self, request, building_id, *args, **kwargs):

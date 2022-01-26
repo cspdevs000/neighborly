@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <div class='home-header'>
+        <h1>Neighborly</h1>
+    </div>
+    <div class='add-building-form'>
+        <form action="{% url 'home' %}" method='POST'>
+        {% csrf_token %}
+        {{ buildingform }}
+        <button type='submit'>submit</button>
+        </form>
+    </div>
+{% endblock %}

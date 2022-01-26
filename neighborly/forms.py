@@ -1,5 +1,5 @@
 from django import forms
-from neighborly.models import Post, Reply
+from neighborly.models import Post, Reply, Building
 
 class PostForm(forms.ModelForm):
     body = forms.CharField(
@@ -24,3 +24,8 @@ class ReplyForm(forms.ModelForm):
     class Meta:
         model = Reply
         fields = ['body']
+
+class BuildingForm(forms.ModelForm):
+    class Meta:
+        model = Building
+        fields= '__all__'
