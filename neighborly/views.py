@@ -1,6 +1,7 @@
 from django.http import Http404, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render
 from .models import Building, ExtendUser, Post, Reply
+from django.urls import reverse
 from django.contrib.auth.models import User
 from neighborly.forms import PostForm, ReplyForm, BuildingForm
 from django.views import View
@@ -13,7 +14,6 @@ def home(request):
     print('current_user -->', current_user)
     if ExtendUser.objects.filter(user__username = request.user):
         building = ExtendUser.objects.filter(user__username = request.user)[0].building
-        print('building -->', building)
         context = {
             'user': current_user,
             'building': building,
@@ -25,18 +25,28 @@ def home(request):
         }
         return render(request, 'neighborly/home.html', context)
 
-def addbuilding(request):
-    buildingform = BuildingForm()
-    context = {
-        'buildingform': buildingform
-    }
-    return render(request, 'neighborly/addbuilding.html', context)
+class AddBuilding(View):
+    def get(self, request, *args, **kwargs):
+        buildingform = BuildingForm()
+        context = {
+            'buildingform': buildingform
+        }
+        return render(request, 'neighborly/addbuilding.html', context)
+
+    def post(self, request, *args, **kwargs):
+        buildingform = BuildingForm()
+        if buildingform.is_valid():
+            new_building = buildingform.save(commit=False)
+            new_building.save()
+        context = {
+            'buildingform': buildingform,
+        }
+        return HttpResponseRedirect(reverse('addbuilding'))
 
 
 class PostView(View):
     def get(self, request, building_id, *args, **kwargs):
         current_user = request.user
-        print('current_user -->', current_user)
         if ExtendUser.objects.filter(user__username = request.user)[0].building_id == building_id:
             building = get_object_or_404(Building, pk=building_id)
             posts = Post.objects.filter(building = building_id).order_by('-pub_date')
@@ -67,7 +77,7 @@ class PostView(View):
             'post_list': posts,
             'form': form,
         }
-        return render(request, 'neighborly/building.html', context)
+        return HttpResponseRedirect(reverse('building', args=(building.id,)))
 
 class ReplyView(View):
     def get(self, request, post_id, *args, **kwargs):
@@ -99,7 +109,7 @@ class ReplyView(View):
             'reply_list': reply,
             'replyform': replyform,
         }
-        return render(request, 'neighborly/post.html', context)
+        return HttpResponseRedirect(reverse('post', args=(post.id,)))
 
 
 #todo

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 class BuildingAdmin(admin.ModelAdmin):
-    fields = ['address', 'number_of_apts']
+    fields = ['address', 'number_of_apts', 'city', 'state']
 admin.site.register(Building, BuildingAdmin)
 
 class PostAdmin(admin.ModelAdmin):
