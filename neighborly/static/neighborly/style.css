@@ -1,0 +1,54 @@
+* {
+    font-family: 'Rokkitt', serif;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+a {
+    color:green
+}
+
+li {
+    list-style: none;
+}
+
+.home-header {
+    padding: 30px;
+}
+
+.post-container {
+    display:flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 3px;
+    margin: 1px;
+}
+
+.reply-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+    padding: 2px;
+    margin: 1px;
+}
+
+.single-post-container {
+    border: 1px solid blue;
+    padding: 1px;
+    margin: 1px;
+}
+
+.add-comment-container {
+    margin: 1vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 
+body {
+    background: white url("images/bkgd.jpeg");
+    margin: 0 auto;
+} */

@@ -6,15 +6,7 @@ from neighborly.forms import PostForm, ReplyForm
 from django.views import View
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the neighborly test landing page.")
-
-# def home(request):
-#     building_list = Building.objects.all()
-#     print('LIST ->', building_list)
-#     context = {
-#         'building_list': building_list,
-#     }
-#     return render(request, 'neighborly/home.html', context)
+    return render(request, 'neighborly/index.html')
 
 def home(request):
     current_user = request.user
@@ -42,38 +34,31 @@ class PostView(View):
             posts = Post.objects.filter(building = building_id).order_by('-pub_date')
             form = PostForm()
             replyform = ReplyForm()
-
             context = {
                 'building': building,
                 'post_list': posts,
                 'form': form,
                 'replyform': replyform,
             }
-
             return render(request, 'neighborly/building.html', context)
-        
         else:
             return HttpResponseNotFound('<h1>Page not found</h1>')
-
 
     def post(self, request, building_id, *args, **kwargs):
         building = get_object_or_404(Building, pk=building_id)
         posts = Post.objects.filter(building = building_id).order_by('-pub_date')
         form = PostForm(request.POST)
-
         if form.is_valid():
             new_post = form.save(commit=False)
             new_post.user = request.user
             new_post.building = building
             new_post.save()
             form = PostForm()
-
         context = {
             'building': building,
             'post_list': posts,
             'form': form,
         }
-
         return render(request, 'neighborly/building.html', context)
 
 class ReplyView(View):
@@ -82,14 +67,12 @@ class ReplyView(View):
         post = get_object_or_404(Post, pk=post_id)
         reply = Reply.objects.filter(post = post_id).order_by('-pub_date')
         replyform = ReplyForm()
-
         context = {
             "building": building,
             'post': post,
             'reply_list': reply,
             'replyform': replyform,
         }
-
         return render(request, 'neighborly/post.html', context)
 
 
@@ -97,28 +80,28 @@ class ReplyView(View):
         post = get_object_or_404(Post, pk=post_id)
         reply = Reply.objects.filter(post = post_id).order_by('-pub_date')
         replyform = ReplyForm(request.POST)
-
         if replyform.is_valid():
             new_reply = replyform.save(commit=False)
             new_reply.user = request.user
             new_reply.post = post
             new_reply.save()
             replyform = ReplyForm()
-
         context = {
             'post': post,
             'reply_list': reply,
             'replyform': replyform,
         }
-
         return render(request, 'neighborly/post.html', context)
 
 
 #todo
-#add building search to home page
-#fix reply form on building page
-#add request to be added to building button
+#add building form page with cooresponding button on home page
 #add send invitation functionality for building admin
+#add city and state to building model
+#add building search to home page
+#if search comes up empty, prompt user to add building
+#add request to be added to building button
+#pinned posts
 
 #style home page
 #style building page / posts & replies

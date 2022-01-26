@@ -1,27 +1,29 @@
 {% extends "base_generic.html" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'neighborly/style.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Rokkitt:wght@100&display=swap" rel="stylesheet">
 
 {% block content %}
-    <h1>Building PAGE</h1>
-    <h1>{{ building.address }}</h1>
-    <h2>{{ building.number_of_apts }}</h2>
+    <h2 class='home-header'>{{ building.address }}</h2>
     <div class='post-container'>
-        <ul>
             {% for post in post_list %}
-            <li><a href="/post/{{ post.id }}/">Post</a> by {{ post.user }}: {{ post.body }} ({{post.pub_date}})</li>
-            <ul>
+            <div class='single-post-container'>
+            <a href="/post/{{ post.id }}/">Post</a> by {{ post.user }}: {{ post.body }} ({{post.pub_date}})
             </div>
-            <div class='reply-container'>
                 {% for reply in post.reply_set.all %}
-                <li>Reply by {{ reply.user }}: {{ reply.body }} ({{ reply.pub_date }})</li>  
+                <div class='reply-container'>
+                    Reply by {{ reply.user }}: {{ reply.body }} ({{ reply.pub_date }})
+                </div>
                 {% endfor %}
-            </ul>
-        {% endfor %}
-    </ul>
+            {% endfor %}
     </div>
     <div class='add-comment-container'>
     <form action='' method='POST'>
         {% csrf_token %}
         {{ form }}
+        <br />
         <button type="submit">submit</button>
     </form>
     </div>

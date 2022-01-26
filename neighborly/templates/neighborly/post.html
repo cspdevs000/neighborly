@@ -2,7 +2,6 @@
 
 {% block content %}
     <h1>COMMENT PAGE</h1>
-    {% comment %} <a href="{% url 'building' %}">Back to building page</a> {% endcomment %}
     <p>Post by {{ post.user }}: {{ post.body }} ({{post.pub_date}})</p>
     <ul>
         {% for reply in reply_list %}
