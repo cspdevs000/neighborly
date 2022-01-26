@@ -34,13 +34,10 @@ class AddBuilding(View):
         return render(request, 'neighborly/addbuilding.html', context)
 
     def post(self, request, *args, **kwargs):
-        buildingform = BuildingForm()
+        buildingform = BuildingForm(request.POST)
         if buildingform.is_valid():
             new_building = buildingform.save(commit=False)
             new_building.save()
-        context = {
-            'buildingform': buildingform,
-        }
         return HttpResponseRedirect(reverse('addbuilding'))
 
 
@@ -72,11 +69,6 @@ class PostView(View):
             new_post.building = building
             new_post.save()
             form = PostForm()
-        context = {
-            'building': building,
-            'post_list': posts,
-            'form': form,
-        }
         return HttpResponseRedirect(reverse('building', args=(building.id,)))
 
 class ReplyView(View):
@@ -104,11 +96,6 @@ class ReplyView(View):
             new_reply.post = post
             new_reply.save()
             replyform = ReplyForm()
-        context = {
-            'post': post,
-            'reply_list': reply,
-            'replyform': replyform,
-        }
         return HttpResponseRedirect(reverse('post', args=(post.id,)))
 
 
