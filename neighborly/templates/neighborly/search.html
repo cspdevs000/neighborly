@@ -13,6 +13,12 @@
 {% endfor %}
 </ul>
 {% else %}
-<h1>search failed</h1>
+<div class="p-5">
+    <h1>Search failed, try again or</h1>
+    <h3>add your building to our database below to start connecting with your neighbors.</h3>
+    <div class='d-flex justify-content-center mt-5'>
+    <a href="{% url 'addbuilding'%}" class="btn btn-dark mr-2" id="add-building-button">Add your building</a>
+    </div>
+</div>
 {% endif %}
 {% endblock content %}
