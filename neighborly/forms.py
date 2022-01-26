@@ -1,5 +1,4 @@
 from django import forms
-from django.forms import ModelForm
 from neighborly.models import Post, Reply
 
 class PostForm(forms.ModelForm):
@@ -12,4 +11,16 @@ class PostForm(forms.ModelForm):
     )
     class Meta:
         model = Post
+        fields = ['body']
+
+class ReplyForm(forms.ModelForm):
+    body = forms.CharField(
+        label='',
+        widget=forms.Textarea(attrs={
+            'rows': '1',
+            'placeholder': 'type reply here'
+        })
+    )
+    class Meta:
+        model = Reply
         fields = ['body']

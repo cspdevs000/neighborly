@@ -4,19 +4,25 @@
     <h1>Building PAGE</h1>
     <h1>{{ building.address }}</h1>
     <h2>{{ building.number_of_apts }}</h2>
-    <ul>
-        {% for post in post_list %}
-            <li>Post by {{ post.user }}: {{ post.body }} ({{post.pub_date}})</li>
+    <div class='post-container'>
+        <ul>
+            {% for post in post_list %}
+            <li><a href="/post/{{ post.id }}/">Post</a> by {{ post.user }}: {{ post.body }} ({{post.pub_date}})</li>
             <ul>
-            {% for reply in post.reply_set.all %}
-            <li>Reply by {{ reply.user }}: {{ reply.body }} ({{ reply.pub_date }})</li>  
-            {% endfor %}
+            </div>
+            <div class='reply-container'>
+                {% for reply in post.reply_set.all %}
+                <li>Reply by {{ reply.user }}: {{ reply.body }} ({{ reply.pub_date }})</li>  
+                {% endfor %}
             </ul>
         {% endfor %}
     </ul>
+    </div>
+    <div class='add-comment-container'>
     <form action='' method='POST'>
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit">submit</button>
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">submit</button>
     </form>
+    </div>
 {% endblock %}
