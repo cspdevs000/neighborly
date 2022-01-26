@@ -28,8 +28,10 @@ def home(request):
 def search(request):
     if request.method == 'POST':
         searched = request.POST['searched']
+        results = Building.objects.filter(address__icontains=searched)
         context = {
-            'searched': searched
+            'searched': searched,
+            'results': results,
         }
         return render(request, 'neighborly/search.html', context)
     else:
