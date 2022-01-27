@@ -18,7 +18,7 @@ admin.site.register(Reply, ReplyAdmin)
 class ExtendUserInline(admin.StackedInline):
     model = ExtendUser
     can_delete = False
-    verbose_name_plural = 'extendUser'
+    verbose_name_plural = 'users'
 
 class UserAdmin(BaseUserAdmin):
     inlines = (ExtendUserInline,)

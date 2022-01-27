@@ -170,16 +170,28 @@ class ReplyDeleteView(DeleteView):
     template_name = 'neighborly/replydelete.html'
     success_url = reverse_lazy('home')
 
-
 class ProfileView(View):
     def get(self, request, user_id, *args, **kwargs):
-        profile = User.objects.get(pk=user_id)
-        extendbuildingform = ExtendBuildingForm()
+        profile = ExtendUser.objects.get(pk=user_id)
+        user = profile.user
+
         context = {
-            'profile': profile,
-            'extendbuildingform': extendbuildingform
+            'user': user,
+            'profile': profile
         }
-        return render(request, 'neighborly/profile.html', context)
+
+        return render (request, 'neighborly/profile.html', context)
+
+
+# class ProfileView(View):
+#     def get(self, request, user_id, *args, **kwargs):
+#         profile = User.objects.get(pk=user_id)
+#         extendbuildingform = ExtendBuildingForm()
+#         context = {
+#             'profile': profile,
+#             'extendbuildingform': extendbuildingform
+#         }
+#         return render(request, 'neighborly/profile.html', context)
 
 
 #todo
