@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class='flex justify-content-center mt-2'>
+    <h1>REPLY EDIT PAGE</h1>
+    <p>Reply by {{ reply.user }}: {{ reply.body }} ({{reply.pub_date}})</p>
+<div class='add-comment-container'>
+    <form method='POST'>
+        {% csrf_token %}
+        {{ form }}
+        <br />
+        <button type="submit">submit</button>
+    </form>
+</div>
+{% endblock %}

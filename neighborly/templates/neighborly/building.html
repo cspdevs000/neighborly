@@ -15,8 +15,12 @@
             <a href="/post/delete/{{ post.id }}/">Delete</a>
             </div>
                 {% for reply in post.reply_set.all %}
-                <div class='reply-container'>
-                    Reply by {{ reply.user }}: {{ reply.body }} ({{ reply.pub_date }})
+                <div class='d-flex justify-content-center'>
+                    <p>Reply by {{ reply.user }}: {{ reply.body }} ({{ reply.pub_date }})</p>
+                    {% if user == reply.user %}
+                    <a href="/reply/edit/{{ reply.id }}/">Edit</a>
+                    <a href="/reply/delete/{{ reply.id }}/">Delete</a>
+                    {% endif %}
                 </div>
                 {% endfor %}
             {% endfor %}

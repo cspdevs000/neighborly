@@ -88,13 +88,14 @@ class ConfirmBuilding(View):
 
 class PostView(View):
     def get(self, request, building_id, *args, **kwargs):
-        current_user = request.user
         if ExtendUser.objects.filter(user__username = request.user)[0].building_id == building_id:
+            user = request.user
             building = get_object_or_404(Building, pk=building_id)
             posts = Post.objects.filter(building = building_id).order_by('-pub_date')
             form = PostForm()
             replyform = ReplyForm()
             context = {
+                'user': user,
                 'building': building,
                 'post_list': posts,
                 'form': form,
@@ -144,7 +145,6 @@ class ReplyView(View):
         }
         return render(request, 'neighborly/post.html', context)
 
-
     def post(self, request, post_id, *args, **kwargs):
         post = get_object_or_404(Post, pk=post_id)
         reply = Reply.objects.filter(post = post_id).order_by('-pub_date')
@@ -156,6 +156,20 @@ class ReplyView(View):
             new_reply.save()
             replyform = ReplyForm()
         return HttpResponseRedirect(reverse('post', args=(post.id,)))
+
+class ReplyEditView(UpdateView):
+    model = Reply
+    fields = ['body']
+    template_name = 'neighborly/replyedit.html'
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+class ReplyDeleteView(DeleteView):
+    model = Reply
+    template_name = 'neighborly/replydelete.html'
+    success_url = reverse_lazy('home')
+
 
 class ProfileView(View):
     def get(self, request, user_id, *args, **kwargs):
