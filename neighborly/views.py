@@ -1,10 +1,11 @@
 from django.http import Http404, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Building, ExtendUser, Post, Reply
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.models import User
 from neighborly.forms import PostForm, ReplyForm, BuildingForm, ExtendBuildingForm
 from django.views import View
+from django.views.generic.edit import UpdateView, DeleteView
 
 def index(request):
     return render(request, 'neighborly/index.html')
@@ -115,6 +116,20 @@ class PostView(View):
             form = PostForm()
         return HttpResponseRedirect(reverse('building', args=(building.id,)))
 
+class PostEditView(UpdateView):
+    model = Post
+    fields = ['body']
+    template_name = 'neighborly/postedit.html'
+
+    def get_success_url(self):
+        pk = self.kwargs['pk']
+        return reverse_lazy('post', args=(pk,))
+
+class PostDeleteView(DeleteView):
+    model = Post
+    template_name = 'neighborly/postdelete.html'
+    success_url = reverse_lazy('home')
+
 class ReplyView(View):
     def get(self, request, post_id, *args, **kwargs):
         building = ExtendUser.objects.filter(user__username = request.user)[0].building
@@ -145,10 +160,14 @@ class ReplyView(View):
 class ProfileView(View):
     def get(self, request, user_id, *args, **kwargs):
         profile = User.objects.get(pk=user_id)
+        extendbuildingform = ExtendBuildingForm()
         context = {
-            'profile': profile
+            'profile': profile,
+            'extendbuildingform': extendbuildingform
         }
         return render(request, 'neighborly/profile.html', context)
+
+
 #todo
 #make if statement for add building page to only allow if user isn't already attached to a building.
 #if they are, promt them to leave that building or redirect

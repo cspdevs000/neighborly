@@ -6,5 +6,13 @@
 <p>{{ profile }}</p>
 <p>Email: {{ profile.email }} </p>
 <p>Last login: {{ profile.last_login }} </p>
+<p>Update Current Building:</p>
+    <div class='d-flex justify-content-center mt-1 p-2'>
+        <form action="" method='POST'>
+        {% csrf_token %}
+        {{ extendbuildingform }}
+        <button type='submit'>submit</button>
+        </form>
+    </div>
 </div>
 {% endblock content %}

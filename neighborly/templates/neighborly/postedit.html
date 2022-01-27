@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class='flex justify-content-center mt-2'>
+    <h1>POST EDIT PAGE</h1>
+    <p>Post by {{ post.user }}: {{ post.body }} ({{post.pub_date}})</p>
+<div class='add-comment-container'>
+    <form method='POST'>
+        {% csrf_token %}
+        {{ form }}
+        <br />
+        <button id="add-reply-button" type="submit">submit</button>
+    </form>
+</div>
+{% endblock %}

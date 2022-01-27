@@ -11,6 +11,8 @@
             {% for post in post_list %}
             <div class='single-post-container'>
             <a href="/post/{{ post.id }}/">Post</a> by {{ post.user }}: {{ post.body }} ({{post.pub_date}})
+            <a href="/post/edit/{{ post.id }}/">Edit</a>
+            <a href="/post/delete/{{ post.id }}/">Delete</a>
             </div>
                 {% for reply in post.reply_set.all %}
                 <div class='reply-container'>

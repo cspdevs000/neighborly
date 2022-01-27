@@ -16,6 +16,9 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'addbuilding' %}">Add a Building</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/profile/{{ user.id }}/">Profile</a>
+          </li>
           {% if user.is_authenticated %}
           <li class="nav-item">
               <a class="nav-link" href="{% url 'logout'%}?next={% url 'logout' %}">Logout</a>

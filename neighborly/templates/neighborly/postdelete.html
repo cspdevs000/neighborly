@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class='flex justify-content-center mt-2'>
+    <h1>POST DELETE PAGE</h1>
+    <p>Post by {{ post.user }}: {{ post.body }} ({{post.pub_date}})</p>
+<div class='add-comment-container'>
+    <form method='POST'>
+        {% csrf_token %}
+        <p>you are about to delete this post</p>
+        <button id="add-reply-button" class="btn btn-danger" type="submit">delete</button>
+    </form>
+</div>
+{% endblock %}
