@@ -1,5 +1,5 @@
 from django import forms
-from neighborly.models import Post, Reply, Building
+from neighborly.models import Post, Reply, Building, ExtendUser
 
 class PostForm(forms.ModelForm):
     body = forms.CharField(
@@ -29,3 +29,11 @@ class BuildingForm(forms.ModelForm):
     class Meta:
         model = Building
         fields= '__all__'
+
+class ExtendBuildingForm(forms.ModelForm):
+    class Meta:
+        model = ExtendUser
+        fields = ['building']
+    def __init__(self, *args, **kwargs):
+        super(ExtendBuildingForm, self).__init__(*args, **kwargs)
+        self.fields['building'].required = False

@@ -8,6 +8,7 @@
         <form action="" method='POST'>
         {% csrf_token %}
         {{ buildingform }}
+        {% comment %} {{ extendbuildingform }} {% endcomment %}
         <button type='submit'>submit</button>
         </form>
     </div>

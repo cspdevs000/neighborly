@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostView, ReplyView, AddBuilding
+from .views import PostView, ReplyView, AddBuilding, ConfirmBuilding
 from . import views
 
 urlpatterns = [
@@ -7,6 +7,7 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('search/', views.search, name='search'),
     path('addbuilding/', AddBuilding.as_view(), name='addbuilding'),
+    path('confirmbuilding/', ConfirmBuilding.as_view(), name='confirmbuilding'),
     path('building/<int:building_id>/', PostView.as_view(), name='building'),
     path('post/<int:post_id>/', ReplyView.as_view(), name='post'),
 ]
