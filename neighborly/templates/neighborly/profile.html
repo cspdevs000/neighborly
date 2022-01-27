@@ -1,0 +1,10 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class='flex justify-content-center mt-1 p-2'>
+<h1>Profile Page</h1>
+<p>{{ profile }}</p>
+<p>Email: {{ profile.email }} </p>
+<p>Last login: {{ profile.last_login }} </p>
+</div>
+{% endblock content %}

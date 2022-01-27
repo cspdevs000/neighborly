@@ -142,9 +142,16 @@ class ReplyView(View):
             replyform = ReplyForm()
         return HttpResponseRedirect(reverse('post', args=(post.id,)))
 
-
+class ProfileView(View):
+    def get(self, request, user_id, *args, **kwargs):
+        profile = User.objects.get(pk=user_id)
+        context = {
+            'profile': profile
+        }
+        return render(request, 'neighborly/profile.html', context)
 #todo
-#add user assocation to building created upon creation
+#make if statement for add building page to only allow if user isn't already attached to a building.
+#if they are, promt them to leave that building or redirect
 #add profile page (mostly for admin to handle the add user to building requests)
 #CRUD for user and posts
 #pagination for posts
