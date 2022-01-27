@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .models import Building, ExtendUser, Post, Reply
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from neighborly.forms import PostForm, ReplyForm, BuildingForm, ExtendBuildingForm
 from django.views import View
 from django.views.generic.edit import UpdateView, DeleteView
@@ -174,14 +175,24 @@ class ProfileView(View):
     def get(self, request, user_id, *args, **kwargs):
         profile = ExtendUser.objects.get(pk=user_id)
         user = profile.user
-
         context = {
             'user': user,
             'profile': profile
         }
-
         return render (request, 'neighborly/profile.html', context)
 
+class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = ExtendUser
+    fields = ['building', 'name', 'birth_date', 'image']
+    template_name = 'neighborly/profileedit.html'
+
+    def get_success_url(self):
+        pk = self.kwargs['pk']
+        return reverse_lazy('profile', args=(pk,))
+
+    def test_func(self):
+        profile = self.get_object()
+        return self.request.user == profile.user
 
 # class ProfileView(View):
 #     def get(self, request, user_id, *args, **kwargs):
@@ -197,8 +208,7 @@ class ProfileView(View):
 #todo
 #make if statement for add building page to only allow if user isn't already attached to a building.
 #if they are, promt them to leave that building or redirect
-#add profile page (mostly for admin to handle the add user to building requests)
-#CRUD for user and posts
+#CRUD for user
 #pagination for posts
 #add send invitation functionality for building admin
 #pinned posts

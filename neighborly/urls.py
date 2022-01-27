@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostView, ReplyView, AddBuilding, ConfirmBuilding, ProfileView, PostEditView, PostDeleteView, ReplyEditView, ReplyDeleteView
+from .views import PostView, ReplyView, AddBuilding, ConfirmBuilding, ProfileView, PostEditView, PostDeleteView, ReplyEditView, ReplyDeleteView, ProfileEditView
 from . import views
 
 urlpatterns = [
@@ -15,4 +15,5 @@ urlpatterns = [
     path('reply/edit/<int:pk>/', ReplyEditView.as_view(), name='replyedit'),
     path('reply/delete/<int:pk>/', ReplyDeleteView.as_view(), name='replydelete'),
     path('profile/<int:user_id>/', ProfileView.as_view(), name='profile'),
+    path('profile/edit/<int:pk>/', ProfileEditView.as_view(), name='profileedit'),
 ]

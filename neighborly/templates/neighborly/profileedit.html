@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>PROFILE EDIT PAGE</h1>
+<div class='row justify-content-center mt-2 mb-5'>
+    <div class="col-md-5 col-sm-12 border-bottom">
+    <form method='POST' enctype='multipart/form-data'>
+        {% csrf_token %}
+        {{ form | crispy }}
+        <br />
+        <button type="submit">update profile</button>
+    </form>
+    </div>
+</div>
+{% endblock %}
