@@ -40,6 +40,8 @@ def search(request):
 
 class AddBuilding(View):
     def get(self, request, *args, **kwargs):
+        # current_user = ExtendUser.objects.filter(user__username = request.user)[0]
+        # print('current user --->', current_user)
         buildingform = BuildingForm()
         context = {
             'buildingform': buildingform
@@ -113,10 +115,11 @@ class ReplyView(View):
 
 
 #todo
+#add user assocation to building created upon creation
+#add profile page (mostly for admin to handle the add user to building requests)
 #add send invitation functionality for building admin
-#if search comes up empty, prompt user to add building
-#add request to be added to building function
 #pinned posts
+#requests could be notifications rather than email? w approve / reject buttons?
 
 #style home page
 #style building page / posts & replies

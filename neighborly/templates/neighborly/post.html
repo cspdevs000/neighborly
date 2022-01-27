@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+<div class='flex justify-content-center mt-2'>
     <h1>COMMENT PAGE</h1>
     <p>Post by {{ post.user }}: {{ post.body }} ({{post.pub_date}})</p>
     <ul>
@@ -8,10 +9,13 @@
             <li>Reply by {{ reply.user }}: {{ reply.body }} ({{ reply.pub_date }})</li>  
         {% endfor %}
     </ul>
+<div class='add-comment-container'>
     <form method='POST'>
         {% csrf_token %}
         {{ replyform }}
-        <button type="submit">submit</button>
+        <br />
+        <button id="add-reply-button" type="submit">submit</button>
     </form>
     <p><a href="/building/{{ building.id }}/">Back to Building Page</a></p>
+</div>
 {% endblock %}

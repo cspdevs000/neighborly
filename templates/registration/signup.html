@@ -1,10 +1,23 @@
 {% extends 'base_generic.html' %}
 
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
 {% block content %}
-    <h2>Sign Up</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Sign Up">
-    </form>
+<h1>{% trans "Sign Up" %}</h1>
+
+<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+<div class='flex justify-content-center mt-1 p-2'>
+<form class="signup" id="signup_form" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+</form>
+</div>
+
 {% endblock %}

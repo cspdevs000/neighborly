@@ -18,7 +18,7 @@ class ReplyForm(forms.ModelForm):
         label='',
         widget=forms.Textarea(attrs={
             'rows': '1',
-            'placeholder': 'type reply here'
+            'placeholder': 'type reply here',
         })
     )
     class Meta:
