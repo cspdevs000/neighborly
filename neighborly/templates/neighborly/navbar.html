@@ -13,18 +13,18 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
           </li>
+          {% if user.is_authenticated %}
           {% if user.profile.building == null %}
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'addbuilding' %}">Add a Building</a>
           </li>
           {% endif %}
           <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout'%}?next={% url 'logout' %}">Logout</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/profile/{{ user.id }}/">Profile</a>
           </li>
-          {% if user.is_authenticated %}
-          <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout'%}?next={% url 'logout' %}">Logout</a>
-            </li>
         {% else %}
           <li class="nav-item">
               <a class="nav-link" href="{% url 'login'%}?next={{request.path}}">Login</a>

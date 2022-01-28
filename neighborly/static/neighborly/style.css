@@ -2,9 +2,9 @@
     font-family: 'Rokkitt', serif;
 }
 
-body {
+/* body {
     background: white url("images/bkgd6.jpeg");
-}
+} */
 
 h1, h2, h3, h4, h5, p {
     text-align: center;
@@ -24,11 +24,11 @@ li {
     margin : 0 auto;
 }
 
-input {
+/* input {
     position: relative;
     display: block;
     margin : 0 auto;
-}
+} */
 
 .home-header {
     padding: 30px;

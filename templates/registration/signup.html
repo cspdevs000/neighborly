@@ -1,23 +1,24 @@
 {% extends 'base_generic.html' %}
-
-{% load i18n %}
-
-{% block head_title %}{% trans "Signup" %}{% endblock %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<h1>{% trans "Sign Up" %}</h1>
+<h1>Sign Up</h1><br />
 
 <p>Already have an account? Then please <a href="{% url 'login'%}">sign in</a>.</p>
 
-<div class='flex justify-content-center mt-1 p-2'>
-<form class="signup" id="signup_form" method="post">
+<div class='shadow p-5 mb-5 bg-body rounded'>
+<form id="signup_form" method="post">
   {% csrf_token %}
   {{ form.as_p }}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+  <div class='d-flex justify-content-center'>
+  <button class='btn btn-dark mt-1'type="submit" href="{% url "signup" %}"> Submit &raquo;</button>
+  </div>
 </form>
 </div>
+
+
 
 {% endblock %}
