@@ -1,29 +1,43 @@
 {% extends "base_generic.html" %}
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'neighborly/style.css' %}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Rokkitt:wght@100&display=swap" rel="stylesheet">
 
 {% block content %}
     <h2 class='home-header'>{{ building.address }}</h2>
-    <div class='post-container'>
-            {% for post in post_list %}
-            <div class='single-post-container'>
-            <a href="/post/{{ post.id }}/">Post</a> by {{ post.user }}: {{ post.body }} ({{post.pub_date}})
-            <a href="/post/edit/{{ post.id }}/">Edit</a>
-            <a href="/post/delete/{{ post.id }}/">Delete</a>
+    <div class='flex justify-content-center mt-3'>
+        {% for post in post_list %}
+        <div class='d-flex justify-content-center mt-3' >
+            <button class="btn btn-dark p-3 w-75" type="button" data-toggle="collapse" data-target="#collapseExample{{ post.id }}" aria-expanded="false" aria-controls="collapseExample{{ post.id }}">
+                <strong>{{ post.user }}</strong>: {{ post.body }} ({{post.pub_date}})
+            </button>
+            <button class="btn btn-light"><a class="text-decoration-none" href="/post/{{ post.id }}/"><strong>Reply</strong></a></button>
+            {% if user == post.user %}
+            <div class="nav-item dropdown">
+                <a class="nav-link-dark dropdown-toggle align-middle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="px-4" href="/post/edit/{{ post.id }}/">Edit</a>
+                    <a class="p-1" href="/post/delete/{{ post.id }}/">Delete</a>
+                </div>
             </div>
+            {% endif %}
+            </div>
+            <div class="collapse" id="collapseExample{{ post.id }}">
                 {% for reply in post.reply_set.all %}
-                <div class='d-flex justify-content-center'>
-                    <p>Reply by {{ reply.user }}: {{ reply.body }} ({{ reply.pub_date }})</p>
+                <div class="d-inline-flex w-75 mt-1">
+                    <p><strong>{{ reply.user }}</strong>: {{ reply.body }} ({{ reply.pub_date }})</p>
                     {% if user == reply.user %}
-                    <a href="/reply/edit/{{ reply.id }}/">Edit</a>
-                    <a href="/reply/delete/{{ reply.id }}/">Delete</a>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a href="/reply/edit/{{ reply.id }}/">Edit</a>
+                            <a href="/reply/delete/{{ reply.id }}/">Delete</a>
+                        </div>
+                    </div>
                     {% endif %}
                 </div>
                 {% endfor %}
-            {% endfor %}
+            </div>
+        {% endfor %}
     </div>
     <div class='add-comment-container'>
     <form action='' method='POST'>

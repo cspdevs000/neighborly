@@ -84,7 +84,7 @@ class PostView(View):
         if ExtendUser.objects.filter(user__username = request.user)[0].building_id == building_id:
             user = request.user
             building = get_object_or_404(Building, pk=building_id)
-            posts = Post.objects.filter(building = building_id).order_by('-pub_date')
+            posts = Post.objects.filter(building = building_id).order_by('-pub_date')[:5]
             form = PostForm()
             replyform = ReplyForm()
             context = {
@@ -100,7 +100,7 @@ class PostView(View):
 
     def post(self, request, building_id, *args, **kwargs):
         building = get_object_or_404(Building, pk=building_id)
-        posts = Post.objects.filter(building = building_id).order_by('-pub_date')
+        posts = Post.objects.filter(building = building_id).order_by('-pub_date')[:5]
         form = PostForm(request.POST)
         if form.is_valid():
             new_post = form.save(commit=False)
@@ -131,7 +131,7 @@ class ReplyView(View):
         reply = Reply.objects.filter(post = post_id).order_by('-pub_date')
         replyform = ReplyForm()
         context = {
-            "building": building,
+            'building': building,
             'post': post,
             'reply_list': reply,
             'replyform': replyform,
@@ -189,8 +189,6 @@ class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 #todo
-#make if statement for add building page to only allow if user isn't already attached to a building.
-#if they are, promt them to leave that building or redirect
 #pagination for posts
 #add send invitation functionality for building admin
 #pass admin roles to another user
