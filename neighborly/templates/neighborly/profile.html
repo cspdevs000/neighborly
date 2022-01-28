@@ -18,16 +18,18 @@
         {% if profile.building %}
         <p>Building:{{ profile.building }}</p>
         {% endif %}
-        {% if request.user == user %}
-        <a href="{% url 'profileedit' profile.pk %}">
-            Update Your Profile
-        </a>
-        {% endif %}
-        {% if request.user == user %}
-        <a href="{% url 'profiledelete' profile.pk %}">
-            Delete Your Profile
-        </a>
-        {% endif %}
+        <div class='d-flex justify-content-center p-3'>
+            {% if request.user == user %}
+            <a class='p-2' href="{% url 'profileedit' profile.pk %}">
+                Update Your Profile
+            </a>
+            {% endif %}
+            {% if request.user == user %}
+            <a class='p-2' href="{% url 'profiledelete' profile.pk %}">
+                Delete Your Profile
+            </a>
+            {% endif %}
+        </div>
     </div>
 
 

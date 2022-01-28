@@ -1,15 +1,19 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <div class='home-header'>
-        <h1>Neighborly</h1>
-    </div>
+<div class='has-bg-img'>
+  {% comment %} <img class='bg-img position-absolute' src='../static/neighborly/images/bkgd6.jpeg' alt=''> {% endcomment %}
+  <div class='home-header mt-1 z-index-1'>
+    <h1>Neighborly</h1>
+  </div>
   {% if building %}
-    <h3>Head to your building's page..<br />
-        <a href="/building/{{ building.id }}/">{{ building.address }}</a>
+  <div class="indigo-300">
+    <h3>Head to your building's page..<br /><br />
+        <a class="text-decoration-none mt-2 p-5" href="/building/{{ building.id }}/">{{ building.address }}</a>
     </h3>
+  </div>
   {% else %}
-    <div class='flex justify-content-center mt-5'>
+    <div class='flex justify-content-center mt-3'>
       <h3>You are currently not registered to one of our buildings</h3>
       <p>Add your building to our database below to start connecting with your neighbors.</p>
       <div class='d-flex justify-content-center mt-5'>
@@ -23,8 +27,11 @@
         {% csrf_token %}
         <input class="form-control me-2" type="search" placeholder="Search by address" aria-label="Search" name="searched">
         <br />
+        <div class='d-flex justify-content-center p-1 mt-1'>
         <button class="btn btn-outline-success" type="submit">Go</button>
+        </div>
       </form>
   </div>
   {% endif %}
+</div>
 {% endblock %}

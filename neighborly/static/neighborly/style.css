@@ -2,6 +2,10 @@
     font-family: 'Rokkitt', serif;
 }
 
+body {
+    background: white url("images/bkgd6.jpeg");
+}
+
 h1, h2, h3, h4, h5, p {
     text-align: center;
 }
@@ -58,9 +62,3 @@ input {
     display: flex;
     flex-direction: column;
 }
-
-/* 
-body {
-    background: white url("images/bkgd.jpeg");
-    margin: 0 auto;
-} */

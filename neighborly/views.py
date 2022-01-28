@@ -193,11 +193,13 @@ class ProfileDeleteView(DeleteView):
 
 
 #todo
+#change navbar search to be for users or something else
 #add send invitation functionality for building admin
 #pass admin roles to another user
 #pinned posts
 #requests could be notifications rather than email? w approve / reject buttons?
 #delete profile confirmation redirect?
+#elaborate on photo upload
 
 #style home page
 #style building page / posts & replies
