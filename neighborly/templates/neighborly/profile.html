@@ -15,10 +15,10 @@
         <p>Name: {{ profile.name }}</p>
         {% endif %}
         {% if profile.birth_date %}
-        <p>Birth Date:{{ profile.birth_date }}</p>
+        <p>Birth Date: {{ profile.birth_date }}</p>
         {% endif %}
         {% if profile.building %}
-        <p>Building:{{ profile.building }}</p>
+        <p>Building: {{ profile.building }}</p>
         {% endif %}
         <div class='d-flex justify-content-center p-3'>
             {% if request.user == user %}

@@ -172,6 +172,7 @@ class ReplyDeleteView(DeleteView):
 
 class ProfileView(View):
     def get(self, request, user_id, *args, **kwargs):
+        print('imageURL --->', request.user.profile.image)
         profile = ExtendUser.objects.get(pk=user_id)
         user = profile.user
         context = {
@@ -250,7 +251,6 @@ class AddOccupantsView(View):
 #add send invitation functionality for building admin
 #pass admin roles to another user
 #pinned posts
-#requests could be notifications rather than email? w approve / reject buttons?
 #delete profile confirmation redirect?
 #elaborate on photo upload
 
