@@ -186,15 +186,18 @@ class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         profile = self.get_object()
         return self.request.user == profile.user
 
+class ProfileDeleteView(DeleteView):
+    model = User
+    template_name = 'neighborly/profiledelete.html'
+    success_url = reverse_lazy('index')
 
 
 #todo
-#pagination for posts
 #add send invitation functionality for building admin
 #pass admin roles to another user
 #pinned posts
 #requests could be notifications rather than email? w approve / reject buttons?
-#delete profile option
+#delete profile confirmation redirect?
 
 #style home page
 #style building page / posts & replies

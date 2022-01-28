@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class='flex justify-content-center mt-2'>
+    <h1>PROFILE DELETE PAGE</h1>
+    <p>{{ user.profile }}</p>
+<div class=''>
+    <form method='POST'>
+        {% csrf_token %}
+        <p>you are about to delete this profile</p>
+        <button class="btn btn-danger" type="submit">delete</button>
+    </form>
+</div>
+{% endblock %}
