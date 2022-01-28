@@ -30,7 +30,7 @@ class Reply(models.Model):
 
 class ExtendUser(models.Model):
     user = models.OneToOneField(User, primary_key=True, verbose_name='user', related_name='profile', on_delete=models.CASCADE)
-    building = models.ForeignKey(Building, blank=True, null=True, on_delete=models.CASCADE)
+    building = models.ForeignKey(Building, blank=True, null=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=30, blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
     image = models.ImageField(upload_to='uploads/profile_pictures', default='uploads/profile_pictures/default.png', blank=True)

@@ -63,27 +63,19 @@ class AddBuilding(View):
 
     def post(self, request, *args, **kwargs):
         buildingform = BuildingForm(request.POST)
+        extendbuildingform = ExtendBuildingForm(request.POST)
         if buildingform.is_valid():
             new_building = buildingform.save(commit=False)
             new_building.save()
+        if extendbuildingform.is_valid():
+            new_user_building = extendbuildingform.save(commit=False)
+            new_user_building.building_id = new_building.id
+            new_user_building.user_id = request.user.id
+            new_user_building.save()
         return redirect('confirmbuilding')
 
 class ConfirmBuilding(View):
     def get(self, request, *args, **kwargs):
-        building_confirmation = Building.objects.all()
-        extendbuildingform = ExtendBuildingForm()
-        context = {
-            'buildingconfirmation': building_confirmation,
-            'extendbuildingform': extendbuildingform
-        }
-        return render(request, 'neighborly/confirmbuilding.html', context)
-
-    def post(self, request, *args, **kwargs):
-        extendbuildingform = ExtendBuildingForm(request.POST)
-        if extendbuildingform.is_valid():
-            new_user = extendbuildingform.save(commit=False)
-            new_user.user_id = request.user.id
-            new_user.save()
         return render(request, 'neighborly/confirmbuilding.html')
 
 
@@ -194,25 +186,17 @@ class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         profile = self.get_object()
         return self.request.user == profile.user
 
-# class ProfileView(View):
-#     def get(self, request, user_id, *args, **kwargs):
-#         profile = User.objects.get(pk=user_id)
-#         extendbuildingform = ExtendBuildingForm()
-#         context = {
-#             'profile': profile,
-#             'extendbuildingform': extendbuildingform
-#         }
-#         return render(request, 'neighborly/profile.html', context)
 
 
 #todo
 #make if statement for add building page to only allow if user isn't already attached to a building.
 #if they are, promt them to leave that building or redirect
-#CRUD for user
 #pagination for posts
 #add send invitation functionality for building admin
+#pass admin roles to another user
 #pinned posts
 #requests could be notifications rather than email? w approve / reject buttons?
+#delete profile option
 
 #style home page
 #style building page / posts & replies

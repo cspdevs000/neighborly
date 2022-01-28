@@ -13,9 +13,11 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
           </li>
+          {% if user.profile.building == null %}
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'addbuilding' %}">Add a Building</a>
           </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/profile/{{ user.id }}/">Profile</a>
           </li>
