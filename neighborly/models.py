@@ -9,6 +9,7 @@ class Building(models.Model):
     number_of_apts = models.IntegerField(default=0)
     city = models.CharField(max_length=30, default='')
     state = models.CharField(max_length=2, default='')
+    creator = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
     def __str__(self):
         return self.address
 

@@ -30,6 +30,7 @@ class BuildingForm(forms.ModelForm):
     number_of_apts = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
     city = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     state = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    creator = forms.IntegerField(widget=forms.HiddenInput, required=False)
 
     class Meta:
         model = Building

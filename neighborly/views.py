@@ -42,9 +42,9 @@ def search(request):
 
 class AddBuilding(View):
     def get(self, request, *args, **kwargs):
+        print('current user --->', request.user.id)
         if request.user == 'AnonymousUser':
             current_user = ExtendUser.objects.filter(user__username = request.user)[0]
-            print('current user --->', current_user)
             buildingform = BuildingForm()
             extendbuildingform = ExtendBuildingForm()
             context = {
@@ -64,8 +64,11 @@ class AddBuilding(View):
     def post(self, request, *args, **kwargs):
         buildingform = BuildingForm(request.POST)
         extendbuildingform = ExtendBuildingForm(request.POST)
+        current_user = User.objects.filter(id = request.user.id)[0]
+        print('USER!! -->', current_user)
         if buildingform.is_valid():
             new_building = buildingform.save(commit=False)
+            new_building.creator = current_user
             new_building.save()
         if extendbuildingform.is_valid():
             new_user_building = extendbuildingform.save(commit=False)
