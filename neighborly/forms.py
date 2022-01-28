@@ -26,6 +26,11 @@ class ReplyForm(forms.ModelForm):
         fields = ['body']
 
 class BuildingForm(forms.ModelForm):
+    address = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    number_of_apts = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
+    city = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    state = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+
     class Meta:
         model = Building
         fields= '__all__'
