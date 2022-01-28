@@ -5,10 +5,10 @@
 <h1>You searched for {{ searched }}</h1>
 <br />
 <ul>
-{% for result in results%}
+{% for result in results %}
 <div class='d-flex justify-content-center p-3'>
     <li class='col absolute'>{{ result }}, {{ result.city }}, {{ result.state }}</li>
-    <a href="" class="col absolute btn btn-dark p-1">Request to join this building</a>
+    <a href="/send_add_request/{{ result.creator_id }}" class="col absolute btn btn-dark p-1">Request to join this building</a>
 </div>
 {% endfor %}
 </ul>

@@ -35,6 +35,7 @@ class ExtendUser(models.Model):
     name = models.CharField(max_length=30, blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
     image = models.ImageField(upload_to='uploads/profile_pictures', default='uploads/profile_pictures/default.png', blank=True)
+    occupants = models.ManyToManyField('ExtendUser', blank=True)
     def __str__(self):
         return self.user.username
 
@@ -46,3 +47,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+class AddRequest(models.Model):
+    from_user = models.ForeignKey(User, related_name='from_user', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(User, related_name='to_user', on_delete=models.CASCADE)

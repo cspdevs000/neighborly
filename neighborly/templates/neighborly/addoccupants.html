@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{% for request in requests %}
+{% comment %} {% if request.to_user == user %} {% endcomment %}
+<ul class='users'>
+    <li>{{ request.id }} from: {{ request.from_user }}  to: {{ request.to_user }}</li>
+    <a class="btn btn-dark" href="/approve_request/{{ request.id }}">approve request</a>
+</ul>
+{% comment %} {% endif %} {% endcomment %}
+{% endfor %}
+{% endblock %}

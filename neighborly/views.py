@@ -1,6 +1,6 @@
 from django.http import Http404, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import Building, ExtendUser, Post, Reply
+from .models import AddRequest, Building, ExtendUser, Post, Reply
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -31,9 +31,13 @@ def search(request):
     if request.method == 'POST':
         searched = request.POST['searched']
         results = Building.objects.filter(address__icontains=searched)
+        print('RESULTS', results)
+        admins = Building.objects.filter(address__icontains=searched).values('creator_id')
+        print('ADMINS', admins)
         context = {
             'searched': searched,
             'results': results,
+            'admins' : admins,
         }
         return render(request, 'neighborly/search.html', context)
     else:
@@ -194,7 +198,32 @@ class ProfileDeleteView(DeleteView):
     template_name = 'neighborly/profiledelete.html'
     success_url = reverse_lazy('index')
 
+def send_add_request(request, userID):
+    from_user = request.user
+    to_user = User.objects.get(id=userID)
+    add_request, created = AddRequest.objects.get_or_create(from_user=from_user, to_user=to_user)
+    if created:
+        return HttpResponse('add request sent')
+    else:
+        return HttpResponse('already requested to be added to this building')
 
+def approve_request(request, requestID):
+    add_request = AddRequest.objects.get(id=requestID)
+    if add_request.to_user == request.user:
+        add_request.to_user.occupants.add(add_request.from_user)
+        add_request.from_user.occupants.add(add_request.to_user)
+        add_request.delete()
+        return HttpResponse('new occupant added')
+    else:
+        return HttpResponse('new occupant unable to be added, try again')
+
+class AddOccupantsView(View):
+    def get(self, request, *args, **kwargs):
+        requests = AddRequest.objects.all()
+        context = {
+            'requests': requests
+        }
+        return render(request, 'neighborly/addoccupants.html', context)
 #todo
 #change navbar search to be for users or something else
 #add send invitation functionality for building admin
