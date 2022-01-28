@@ -8,7 +8,9 @@
     <form method='POST'>
         {% csrf_token %}
         <p>you are about to delete this profile</p>
-        <button class="btn btn-danger" type="submit">delete</button>
+        <div class='d-flex justify-content-center mt-1'>
+            <button class="btn btn-danger" type="submit">delete</button>
+        </div>
     </form>
 </div>
 {% endblock %}

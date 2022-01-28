@@ -2,6 +2,8 @@ from django.http import Http404, HttpResponseRedirect, HttpResponse, HttpRespons
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import AddRequest, Building, ExtendUser, Post, Reply
 from django.urls import reverse, reverse_lazy
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from neighborly.forms import PostForm, ReplyForm, BuildingForm, ExtendBuildingForm
@@ -126,10 +128,11 @@ class PostEditView(UpdateView):
         pk = self.kwargs['pk']
         return reverse_lazy('post', args=(pk,))
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(DeleteView, SuccessMessageMixin):
     model = Post
     template_name = 'neighborly/postdelete.html'
     success_url = reverse_lazy('home')
+    success_message = 'Profile was successfully deleted'
 
 class ReplyView(View):
     def get(self, request, post_id, *args, **kwargs):
@@ -225,34 +228,19 @@ def approve_request(request, requestID):
 class AddOccupantsView(View):
     def get(self, request, *args, **kwargs):
         requests = AddRequest.objects.all()
-        # what = request.user.profile.from_user.profile.building_id
-        # print('WHAAAT -->', what)
         context = {
             'requests': requests
         }
         return render(request, 'neighborly/addoccupants.html', context)
 
-    # def post(self, request, requestID, *args, **kwargs):
-    #     add_request = get_object_or_404(AddRequest, pk=requestID)
-    #     building = request.user.profile.building_id
-    #     print ('BUILDING --->', building)
-    #     extendbuildingform = ExtendBuildingForm(request.POST)
-    #     if extendbuildingform.isValid():
-    #         new_user_building = extendbuildingform.save(commit=False)
-    #         add_request.profile.building_id = building
-    #         new_user_building.save()
-    #     return redirect('addoccupants')
 
-
-
-    
 #todo
 #change navbar search to be for users or something else
 #add send invitation functionality for building admin
 #pass admin roles to another user
 #pinned posts
 #delete profile confirmation redirect?
-#elaborate on photo upload
+#fix default photo in cloudinary
 
 #style home page
 #style building page / posts & replies
