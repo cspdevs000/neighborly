@@ -209,9 +209,13 @@ def send_add_request(request, userID):
 
 def approve_request(request, requestID):
     add_request = AddRequest.objects.get(id=requestID)
+    from_user = AddRequest.objects.get(id=requestID).from_user
+    to_user = AddRequest.objects.get(id=requestID).to_user
     if add_request.to_user == request.user:
-        add_request.to_user.occupants.add(add_request.from_user)
-        add_request.from_user.occupants.add(add_request.to_user)
+        add_request.to_user.profile.occupants.add(add_request.from_user.profile)
+        add_request.from_user.profile.occupants.add(add_request.to_user.profile)
+        from_user.profile.building = to_user.profile.building
+        from_user.save()
         add_request.delete()
         return HttpResponse('new occupant added')
     else:
@@ -220,10 +224,27 @@ def approve_request(request, requestID):
 class AddOccupantsView(View):
     def get(self, request, *args, **kwargs):
         requests = AddRequest.objects.all()
+        # what = request.user.profile.from_user.profile.building_id
+        # print('WHAAAT -->', what)
         context = {
             'requests': requests
         }
         return render(request, 'neighborly/addoccupants.html', context)
+
+    # def post(self, request, requestID, *args, **kwargs):
+    #     add_request = get_object_or_404(AddRequest, pk=requestID)
+    #     building = request.user.profile.building_id
+    #     print ('BUILDING --->', building)
+    #     extendbuildingform = ExtendBuildingForm(request.POST)
+    #     if extendbuildingform.isValid():
+    #         new_user_building = extendbuildingform.save(commit=False)
+    #         add_request.profile.building_id = building
+    #         new_user_building.save()
+    #     return redirect('addoccupants')
+
+
+
+    
 #todo
 #change navbar search to be for users or something else
 #add send invitation functionality for building admin

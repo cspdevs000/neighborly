@@ -5,7 +5,9 @@
 {% comment %} {% if request.to_user == user %} {% endcomment %}
 <ul class='users'>
     <li>{{ request.id }} from: {{ request.from_user }}  to: {{ request.to_user }}</li>
+    {% comment %} <form class='' method='POST'> {% endcomment %}
     <a class="btn btn-dark" href="/approve_request/{{ request.id }}">approve request</a>
+    {% comment %} </form> {% endcomment %}
 </ul>
 {% comment %} {% endif %} {% endcomment %}
 {% endfor %}
