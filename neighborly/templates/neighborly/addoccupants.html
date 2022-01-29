@@ -2,17 +2,25 @@
 
 {% block content %}
 {% if requests %}
+<div class='requests mt-5'>
+    <ul>
 {% for request in requests %}
 {% comment %} {% if request.to_user == user %} {% endcomment %}
-<ul class='users'>
     <li>{{ request.id }} from: {{ request.from_user }}  to: {{ request.to_user }}</li>
-    {% comment %} <form class='' method='POST'> {% endcomment %}
     <a class="btn btn-dark" href="/approve_request/{{ request.id }}">approve request</a>
-    {% comment %} </form> {% endcomment %}
+    {% comment %} {% endif %} {% endcomment %}
+    {% endfor %}
 </ul>
-{% comment %} {% endif %} {% endcomment %}
-{% endfor %}
 {% else %}
 <h1>there are currently no requests to display.</h1>
 {% endif %}
+</div>
+<div class='occupants mt-5'>
+    <ul>
+    {% for occupant in occupants %}
+        <li>{{ occupant }}, {{ occupant.user_id }}</li>
+        <a href="/transfer_admin/{{ occupant.user_id }}" class='btn btn-dark'>Transfer building admin roles</a>
+    {% endfor %}
+    </ul>
+</div>
 {% endblock %}

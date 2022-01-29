@@ -240,14 +240,30 @@ def approve_request(request, requestID):
         from_user.save()
         add_request.delete()
         messages.success(request, 'Request has been approved.')
-        return redirect('addoccupants')
+        return redirect('addoccupants',)
     else:
         return HttpResponse('new occupant unable to be added, try again')
 
+def transfer_admin(request, occupantID):
+    building = get_object_or_404(Building, pk=request.user.profile.building_id)
+    to_user = get_object_or_404(User, pk=occupantID)
+    if building == request.user.profile.building:
+        building.creator = to_user
+        building.save()
+        messages.success(request, 'Roles have been transferred.')
+        return redirect('home')
+    else:
+        return HttpResponse('unable to transfer roles')
+
 class AddOccupantsView(View):
-    def get(self, request, *args, **kwargs):
+    def get(self, request, building_id, *args, **kwargs):
+        building = get_object_or_404(Building, pk=building_id)
+        occupants = ExtendUser.objects.filter(occupants = building_id)
+        print('occupants~!! --->', occupants[0].user_id)
         requests = AddRequest.objects.all()
         context = {
+            'occupants': occupants,
+            'building': building,
             'requests': requests
         }
         return render(request, 'neighborly/addoccupants.html', context)

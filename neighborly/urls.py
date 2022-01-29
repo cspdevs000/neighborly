@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostView, ReplyView, AddBuilding, LeaveBuilding, AddOccupantsView, ConfirmBuilding, ProfileView, PostEditView, PostDeleteView, ReplyEditView, ReplyDeleteView, ProfileEditView, ProfileDeleteView, send_add_request, approve_request
+from .views import PostView, ReplyView, AddBuilding, LeaveBuilding, AddOccupantsView, ConfirmBuilding, ProfileView, PostEditView, PostDeleteView, ReplyEditView, ReplyDeleteView, ProfileEditView, ProfileDeleteView, transfer_admin, send_add_request, approve_request
 from . import views
 
 urlpatterns = [
@@ -8,7 +8,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('addbuilding/', AddBuilding.as_view(), name='addbuilding'),
     path('leavebuilding/', LeaveBuilding.as_view(), name='leavebuilding'),
-    path('addoccupants/', AddOccupantsView.as_view(), name='addoccupants'),
+    path('addoccupants/<int:building_id>', AddOccupantsView.as_view(), name='addoccupants'),
     path('confirmbuilding/', ConfirmBuilding.as_view(), name='confirmbuilding'),
     path('building/<int:building_id>/', PostView.as_view(), name='building'),
     path('post/edit/<int:pk>/', PostEditView.as_view(), name='postedit'),
@@ -21,4 +21,5 @@ urlpatterns = [
     path('profile/delete/<int:pk>/', ProfileDeleteView.as_view(), name='profiledelete'),
     path('send_add_request/<int:userID>/', send_add_request, name='send_add_request'),
     path('approve_request/<int:requestID>/', approve_request, name='approve_request'),
+    path('transfer_admin/<int:occupantID>/', transfer_admin, name='transfer_admin'),
 ]

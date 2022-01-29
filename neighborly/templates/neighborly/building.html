@@ -3,7 +3,7 @@
 {% block content %}
     <h2 class='home-header'>{{ building.address }}</h2>
     {% if user == building.creator %}
-    <a href="{% url "addoccupants" %}"><h2>YOU ARE CREATOR</h2></a>
+    <a href="{% url "addoccupants" building.id %}"><h2>YOU ARE CREATOR</h2></a>
     {% endif %}
     <div class='flex justify-content-center mt-3'>
         {% for post in post_list %}
