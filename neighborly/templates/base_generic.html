@@ -14,6 +14,7 @@
   <link rel="stylesheet" type="text/css" href="{% static 'neighborly/style.css' %}">
 </head>
 <body>
+  {% include 'neighborly/includes/messages.html' %}
   {% include 'neighborly/navbar.html' %}
   {% block content %}
   {% endblock %}

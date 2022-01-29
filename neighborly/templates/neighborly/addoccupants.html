@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+{% if requests %}
 {% for request in requests %}
 {% comment %} {% if request.to_user == user %} {% endcomment %}
 <ul class='users'>
@@ -11,4 +12,7 @@
 </ul>
 {% comment %} {% endif %} {% endcomment %}
 {% endfor %}
+{% else %}
+<h1>there are currently no requests to display.</h1>
+{% endif %}
 {% endblock %}

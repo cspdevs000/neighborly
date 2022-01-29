@@ -213,9 +213,10 @@ class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         profile = self.get_object()
         return self.request.user == profile.user
 
-class ProfileDeleteView(DeleteView):
+class ProfileDeleteView(DeleteView, SuccessMessageMixin):
     model = User
     template_name = 'neighborly/profiledelete.html'
+    success_message = "Profile was successfully deleted"
     success_url = reverse_lazy('index')
 
 def send_add_request(request, userID):
@@ -223,7 +224,8 @@ def send_add_request(request, userID):
     to_user = User.objects.get(id=userID)
     add_request, created = AddRequest.objects.get_or_create(from_user=from_user, to_user=to_user)
     if created:
-        return HttpResponse('add request sent')
+        messages.success(request, 'Request has been sent.')
+        return redirect('home')
     else:
         return HttpResponse('already requested to be added to this building')
 
@@ -237,7 +239,8 @@ def approve_request(request, requestID):
         from_user.profile.building = to_user.profile.building
         from_user.save()
         add_request.delete()
-        return HttpResponse('new occupant added')
+        messages.success(request, 'Request has been approved.')
+        return redirect('addoccupants')
     else:
         return HttpResponse('new occupant unable to be added, try again')
 
@@ -255,7 +258,6 @@ class AddOccupantsView(View):
 #add send invitation functionality for building admin
 #pass admin roles to another user
 #pinned posts
-#delete profile confirmation redirect?
 #fix default photo in cloudinary
 
 #style home page
