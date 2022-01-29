@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Are you sure you want to relinquish access to this building's page?</h1>
+<br />
+<form method='POST'>
+    {% csrf_token %}
+    {{ extendbuildingform }}
+    <button type='submit' class='btn btn-dark'>
+        <p>YES</p>
+    </button>
+</form>
+{% endblock %}

@@ -1,3 +1,4 @@
+from contextlib import nullcontext
 from django.http import Http404, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import AddRequest, Building, ExtendUser, Post, Reply
@@ -134,6 +135,21 @@ class PostDeleteView(DeleteView, SuccessMessageMixin):
     success_url = reverse_lazy('home')
     success_message = 'Profile was successfully deleted'
 
+class LeaveBuilding(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'neighborly/leavebuilding.html')
+
+    def post(self, request, *args, **kwargs):
+        extendbuildingform = ExtendBuildingForm(request.POST)
+        if extendbuildingform.is_valid():
+            new_user_building = extendbuildingform.save(commit=False)
+            new_user_building.building_id = None
+            new_user_building.user_id = request.user.id
+            new_user_building.save()
+        return redirect('home')
+
+
+
 class ReplyView(View):
     def get(self, request, post_id, *args, **kwargs):
         building = ExtendUser.objects.filter(user__username = request.user)[0].building
@@ -186,7 +202,7 @@ class ProfileView(View):
 
 class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ExtendUser
-    fields = ['building', 'name', 'birth_date', 'image']
+    fields = ['name', 'birth_date', 'image']
     template_name = 'neighborly/profileedit.html'
 
     def get_success_url(self):

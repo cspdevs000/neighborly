@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostView, ReplyView, AddBuilding, AddOccupantsView, ConfirmBuilding, ProfileView, PostEditView, PostDeleteView, ReplyEditView, ReplyDeleteView, ProfileEditView, ProfileDeleteView, send_add_request, approve_request
+from .views import PostView, ReplyView, AddBuilding, LeaveBuilding, AddOccupantsView, ConfirmBuilding, ProfileView, PostEditView, PostDeleteView, ReplyEditView, ReplyDeleteView, ProfileEditView, ProfileDeleteView, send_add_request, approve_request
 from . import views
 
 urlpatterns = [
@@ -7,6 +7,7 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('search/', views.search, name='search'),
     path('addbuilding/', AddBuilding.as_view(), name='addbuilding'),
+    path('leavebuilding/', LeaveBuilding.as_view(), name='leavebuilding'),
     path('addoccupants/', AddOccupantsView.as_view(), name='addoccupants'),
     path('confirmbuilding/', ConfirmBuilding.as_view(), name='confirmbuilding'),
     path('building/<int:building_id>/', PostView.as_view(), name='building'),
