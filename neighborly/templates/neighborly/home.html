@@ -1,13 +1,14 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+<div class='img-container'>
 <div class='has-bg-img'>
-  <img class='bg-img position-absolute' src='../static/neighborly/images/bkgd6.jpeg' alt=''>
-  <div class='home-header mt-1 z-index-1'>
+  {% comment %} <img class='bg-img position-absolute zindex-modal-backdrop' src='../static/neighborly/images/bkgd7.jpeg' alt=''> {% endcomment %}
+  <div class='home-header mt-1'>
     <h1>Neighborly</h1>
   </div>
   {% if building %}
-  <div class="indigo-300">
+  <div class="">
     <h3>Head to your building's page..<br /><br />
         <a class="text-decoration-none mt-2 p-5" href="/building/{{ building.id }}/">{{ building.address }}</a>
     </h3>
@@ -33,5 +34,6 @@
       </form>
   </div>
   {% endif %}
+</div>
 </div>
 {% endblock %}

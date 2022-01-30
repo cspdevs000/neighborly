@@ -2,9 +2,20 @@
     font-family: 'Rokkitt', serif;
 }
 
-/* body {
-    background: white url("images/bkgd6.jpeg");
-} */
+.img-container {
+    background-image: url("images/bkgd7.jpeg");
+    position: relative;
+}
+
+.has-bg-img {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: white;
+    opacity: 0.6;
+}
 
 h1, h2, h3, h4, h5, p {
     text-align: center;

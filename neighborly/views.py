@@ -202,7 +202,7 @@ class ProfileView(View):
 
 class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ExtendUser
-    fields = ['name', 'birth_date', 'image']
+    fields = ['name', 'image']
     template_name = 'neighborly/profileedit.html'
 
     def get_success_url(self):
