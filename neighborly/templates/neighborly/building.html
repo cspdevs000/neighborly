@@ -28,9 +28,10 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="justify-content-center collapse" id="collapseExample{{ post.id }}">
+            <div class="ml-3 flex-column justify-content-center collapse" id="collapseExample{{ post.id }}">
+                <ul>
                 {% for reply in post.reply_set.all %}
-                    <div class="d-flex position-relative justify-content-center w-50 px-4 mt-3">
+                    <li class="d-flex align-items-start w-75 px-4 mt-2">
                         <p><strong>{{ reply.user }}</strong> ({{ reply.pub_date }}): {{ reply.body }}</p>
                         {% if user == reply.user %}
                         <div class="nav-item dropdown">
@@ -42,8 +43,9 @@
                             </div>
                         </div>
                         {% endif %}
-                    </div>
+                    </li>
                 {% endfor %}
+                </ul>
             </div>
         {% endfor %}
     </div>
