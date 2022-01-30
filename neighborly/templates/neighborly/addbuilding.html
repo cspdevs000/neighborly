@@ -1,8 +1,9 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+{% if user.is_authenticated %}
     <div class='home-header'>
-        <h1>Neighborly</h1>
+        <h1>Add your building</h1>
     </div>
     <div class='d-flex justify-content-center mt-1 p-2'>
         <form action="" method='POST'>
@@ -16,5 +17,9 @@
         </div>
         </form>
     </div><br /><br />
-    <p><a href="/home/">Back to Home Page</a></p>
+{% else %}
+    <h3>Please <a class="text-decoration-none" href="{% url 'login'%}">sign in </a>to add a new building</h3>
+{% endif %}
+    <br />
+    <p><a class="text-decoration-none" href="/home/">Back to Home Page</a></p>
 {% endblock %}

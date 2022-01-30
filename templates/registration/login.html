@@ -8,32 +8,33 @@
 
     {% if user.is_authenticated %}
     <br />
-      <p>You are already logged in.</p>
-      <a class="" href="{% url 'logout'%}?next={% url 'logout' %}">Logout</a>
+      <h1>You are already logged in.</h1>
+      <div class='d-flex justify-content-center mt-2'>
+      <a class="text-decoration-none" href="{% url 'logout'%}?next={% url 'logout' %}">Logout</a>
+      </div>
     {% else %}
     <br />
-      <p>Please login.</p>
+      <h1 class="p-3">Please login.</h1>
   <div class='d-flex justify-content-center mt-1 p-2'>
     <form method="post" action="{% url 'login' %}">
       {% csrf_token %}
-      <table>
-        <tr>
-          <td>{{ form.username.label_tag }}</td>
-          <td>{{ form.username }}</td>
-        </tr>
-        <tr>
-          <td>{{ form.password.label_tag }}</td>
-          <td>{{ form.password }}</td>
-        </tr>
-      </table>
-      <div class='d-flex justify-content-center mt-2'>
+          <input placeholder='Username' class='' name='username'>
+          {% comment %} <td>{{ form.username }}</td> {% endcomment %}
+        </input>
+        <input placeholder='Password' class='' name='password'>
+          {% comment %} <td>{{ form.username }}</td> {% endcomment %}
+        </input>
+
+      <div class='d-flex justify-content-center p-3 mt-3'>
       <input type="submit" value="login" class="btn btn-dark" />
       </div>
     </form>
   </div>
 
   {# Assumes you setup the password_reset view in your URLconf #}
-  <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+  <p><a class="text-decoration-none" href="{% url 'password_reset' %}">Lost password?</a></p>
+  <p>Don't have an account with us? Please <a class="text-decoration-none" href="{% url 'signup' %}">sign up</a></p>
+
   {% endif %}
 {% endblock %}
 

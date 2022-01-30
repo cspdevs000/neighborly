@@ -1,5 +1,5 @@
 from contextlib import nullcontext
-from django.http import Http404, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import AddRequest, Building, ExtendUser, Post, Reply
 from django.urls import reverse, reverse_lazy
@@ -272,7 +272,7 @@ class AddOccupantsView(View):
 #todo
 #change navbar search to be for users or something else
 #add send invitation functionality for building admin
-#pass admin roles to another user
+#handle creator leaving building
 #pinned posts
 #fix default photo in cloudinary
 
