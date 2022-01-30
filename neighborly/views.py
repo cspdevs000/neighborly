@@ -240,7 +240,7 @@ def approve_request(request, requestID):
         from_user.save()
         add_request.delete()
         messages.success(request, 'Request has been approved.')
-        return redirect('addoccupants',)
+        return HttpResponseRedirect(reverse('addoccupants', args=(request.user.profile.building_id,)))
     else:
         return HttpResponse('new occupant unable to be added, try again')
 

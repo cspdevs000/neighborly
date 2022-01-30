@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Building, Post, Reply, ExtendUser
+from .models import AddRequest, Building, Post, Reply, ExtendUser
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
@@ -14,6 +14,10 @@ admin.site.register(Post, PostAdmin)
 class ReplyAdmin(admin.ModelAdmin):
     fields = ['user', 'post', 'body', 'pub_date']
 admin.site.register(Reply, ReplyAdmin)
+
+class AddRequestAdmin(admin.ModelAdmin):
+    fields = ['from_user', 'to_user']
+admin.site.register(AddRequest, AddRequestAdmin)
 
 class ExtendUserInline(admin.StackedInline):
     model = ExtendUser

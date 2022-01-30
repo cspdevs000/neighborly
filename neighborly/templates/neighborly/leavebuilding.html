@@ -1,13 +1,20 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h1>Are you sure you want to relinquish access to this building's page?</h1>
+<div class='p-4 mt-3'>
+    <h1>Are you sure you want to relinquish access to this building's page?</h1>
+</div>
 <br />
 <form method='POST'>
     {% csrf_token %}
     {{ extendbuildingform }}
-    <button type='submit' class='btn btn-dark'>
-        <p>YES</p>
-    </button>
-</form>
+    <div class='d-flex justify-content-around mt-3'>
+        <button type='submit' class='p-3 btn btn-dark'>
+            YES
+        </button>
+    </form>
+        <a type='button' href="{% url 'home' %}" class='p-3 btn btn-danger'>
+            NO
+        </a>
+    </div>  
 {% endblock %}

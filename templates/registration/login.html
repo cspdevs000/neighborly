@@ -9,8 +9,9 @@
     {% if user.is_authenticated %}
     <br />
       <h1>You are already logged in.</h1>
-      <div class='d-flex justify-content-center mt-2'>
-      <a class="text-decoration-none" href="{% url 'logout'%}?next={% url 'logout' %}">Logout</a>
+      <div class='d-flex justify-content-around mt-2 p-4'>
+        <a class="text-decoration-none" href="{% url 'logout'%}?next={% url 'logout' %}">Logout</a>
+        <a class="text-decoration-none" href="{% url 'home'%}?next={% url 'home' %}">Home</a>
       </div>
     {% else %}
     <br />
@@ -21,7 +22,7 @@
           <input placeholder='Username' class='' name='username'>
           {% comment %} <td>{{ form.username }}</td> {% endcomment %}
         </input>
-        <input placeholder='Password' class='' name='password'>
+        <input placeholder='Password' class='' type='password' name='password'>
           {% comment %} <td>{{ form.username }}</td> {% endcomment %}
         </input>
 

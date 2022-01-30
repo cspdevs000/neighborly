@@ -1,39 +1,42 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h2 class='home-header'>{{ building.address }}</h2>
+<div class='mt-4 mb-2'>
     {% if user == building.creator %}
-    <a href="{% url "addoccupants" building.id %}"><h2>YOU ARE CREATOR</h2></a>
+        <h1><a href="{% url "addoccupants" building.id %}" class='text-decoration-none'>{{ building.address }}</a></h1>
+    {% else %}
+        <h1 class=''>{{ building.address }}</h1>
     {% endif %}
-    <div class='flex justify-content-center mt-3'>
+</div>
+    <div class='flex justify-content-center'>
         {% for post in post_list %}
         <div class='d-flex justify-content-center mt-3' >
             <button class="btn btn-dark p-3 w-75" type="button" data-toggle="collapse" data-target="#collapseExample{{ post.id }}" aria-expanded="false" aria-controls="collapseExample{{ post.id }}">
-                <strong>{{ post.user }}</strong>: {{ post.body }} ({{post.pub_date}})
+                <strong>{{ post.user }}</strong> ({{post.pub_date}}): {{ post.body }}
             </button>
             <button class="btn btn-light"><a class="text-decoration-none" href="/post/{{ post.id }}/"><strong>Reply</strong></a></button>
             {% if user == post.user %}
-            <div class="nav-item dropdown">
+            <div class="nav-item dropdown position-absolute align-right">
                 <a class="nav-link-dark dropdown-toggle align-middle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="px-4" href="/post/edit/{{ post.id }}/">Edit</a>
-                    <a class="p-1" href="/post/delete/{{ post.id }}/">Delete</a>
+                <div class="dropdown-menu position-absolute" aria-labelledby="navbarDropdown">
+                    <a class="px-4 text-decoration-none" href="/post/edit/{{ post.id }}/">Edit</a>
+                    <a class="p-1 text-decoration-none" href="/post/delete/{{ post.id }}/">Delete</a>
                 </div>
             </div>
             {% endif %}
             </div>
-            <div class="collapse" id="collapseExample{{ post.id }}">
+            <div class="flex collapse" id="collapseExample{{ post.id }}">
                 {% for reply in post.reply_set.all %}
-                <div class="d-flex justify-content-center mt-3 w-75 mt-1">
-                    <p><strong>{{ reply.user }}</strong>: {{ reply.body }} ({{ reply.pub_date }})</p>
+                <div class="d-flex text-align-center justify-content-center px-4 mt-2">
+                    <h5><strong>{{ reply.user }}</strong> ({{ reply.pub_date }}): {{ reply.body }}</h5>
                     {% if user == reply.user %}
                     <div class="nav-item dropdown">
                         <a class="nav-link-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a href="/reply/edit/{{ reply.id }}/">Edit</a>
-                            <a href="/reply/delete/{{ reply.id }}/">Delete</a>
+                            <a class='px-4 text-decoration-none' href="/reply/edit/{{ reply.id }}/">Edit</a>
+                            <a class='p-1 text-decoration-none' href="/reply/delete/{{ reply.id }}/">Delete</a>
                         </div>
                     </div>
                     {% endif %}
@@ -48,11 +51,10 @@
         {% csrf_token %}
         {{ form }}
         <br />
-        <button type="submit">submit</button>
+        <button class='btn btn-dark' type="submit">submit</button>
     </form>
-    <br />
-    <div class='p-5'>
-    <a class='text-decoration-none btn btn-dark' href="{% url "leavebuilding" %}">Leave this building</a>
+    <div class='p-4'>
+    <a class='text-decoration-none btn btn-danger' href="{% url "leavebuilding" %}">Leave this building</a>
     </div>
 </div>
 {% endblock %}
