@@ -4,14 +4,24 @@
 {% if searched %}
 <h1 class='mt-3'>You searched for {{ searched }}</h1>
 <br />
-<ul>
-{% for result in results %}
-<div class='d-flex justify-content-center p-3'>
-    <li class='col absolute align-center'><strong>{{ result }}, {{ result.city }}, {{ result.state }}</strong></li>
-    <a href="/send_add_request/{{ result.creator_id }}" class="col absolute btn btn-success p-1">Request to join this building</a>
-</div>
-{% endfor %}
-</ul>
+    {% if result %}
+    <ul>
+        {% for result in results %}
+        <div class='d-flex justify-content-center p-3'>
+            <li class='col absolute align-center'><strong>{{ result }}, {{ result.city }}, {{ result.state }}</strong></li>
+            <a href="/send_add_request/{{ result.creator_id }}" class="col absolute btn btn-success p-1">Request to join this building</a>
+        </div>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <div class="p-5">
+        <h1>No buildings exist that match your criteria...</h1><br />
+        <h3>search again or add your building to our database below to start connecting with your neighbors.</h3>
+        <div class='d-flex justify-content-center mt-5'>
+        <a href="{% url 'addbuilding'%}" class="btn btn-dark mr-2" id="add-building-button">Add your building</a>
+        </div>
+    </div>
+    {% endif %}
 {% else %}
 <div class="p-5">
     <h1>Search failed, try again or</h1>
