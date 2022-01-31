@@ -34,6 +34,7 @@
                     {% for reply in post.reply_set.all %}
                         <div class="d-flex justify-content-center p-1">
                             <button class='btn btn-secondary'><strong>{{ reply.user }}</strong> ({{ reply.pub_date }}): {{ reply.body }}</button>
+                        </div>
                             {% if user == reply.user %}
                             <div class="nav-item dropdown position-absolute">
                                 <a class="nav-link-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -43,7 +44,6 @@
                                     <a class='p-1 text-decoration-none' href="/reply/delete/{{ reply.id }}/">Delete</a>
                                 </div>
                             </div>
-                        </div>
                             {% endif %}
                     {% endfor %}
                     </ul>
