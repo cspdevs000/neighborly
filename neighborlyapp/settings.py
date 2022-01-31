@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'neighborlyapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'neighborlyapp',
+        'NAME': 'postgres://kwludgipjfhihf:fd77e1a83823ed8ce6b72d263e67a54764e564466bf9fc0f2919c6013a0ab365@ec2-54-208-139-247.compute-1.amazonaws.com:5432/d7a4pg5dir8uqr',
     }
 }
 
