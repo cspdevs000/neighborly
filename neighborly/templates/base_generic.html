@@ -14,11 +14,10 @@
   integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 crossorigin="anonymous">
   <!-- Add additional CSS in static file -->
-  {% comment %} STARTING TO ADD THINGS NOW {% endcomment %}
   {% load static %}
   <link rel="stylesheet" type="text/css" href="{% static 'neighborly/style.css' %}">
 </head>
-<body>
+<body id='bg' style="background-image: url('{% static "neighborly/images/brick1.jpeg"%}');">
   {% include 'neighborly/includes/messages.html' %}
   {% include 'neighborly/navbar.html' %}
   {% block content %}

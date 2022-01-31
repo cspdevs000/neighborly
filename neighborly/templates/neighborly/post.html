@@ -1,26 +1,30 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<div class='flex justify-content-center'>
-    <div class='p-4 shadow bg-body rounded'>
+<div class='d-flex justify-content-center'>
+    <button class='btn btn-dark mt-1 p-4 shadow rounded'>
         <h1>Post by {{ post.user }}:</h1> 
     <h4>{{ post.body }}</h4>
     <p>Posted on: {{post.pub_date}}</p>
-    </div>
-    <ul>
-        {% for reply in reply_list %}
-            <div class='px-3 mt-1 mr-3'>
-                <p><strong>{{ reply.user }}:</strong> {{ reply.body }} ({{ reply.pub_date }})</p> 
-            </div> 
-        {% endfor %}
-    </ul>
-<div class='add-comment-container'>
-    <form method='POST'>
-        {% csrf_token %}
-        {{ replyform }}
-        <br />
-        <button class='btn btn-dark mt-2 mb-3' id="add-reply-button" type="submit">Submit</button>
-    </form>
-    <p><a class='text-decoration-none' href="/building/{{ building.id }}/">Back to Building Page</a></p>
+    </button>
 </div>
+    <div class='flex justify-content-center'>
+        <ul>
+            {% for reply in reply_list %}
+                <div class='d-flex justify-content-center px-3 ml-auto mt-1 mr-3'>
+                    <button class='btn btn-secondary'><strong>{{ reply.user }}:</strong> {{ reply.body }} ({{ reply.pub_date }})</button> 
+                </div> 
+            {% endfor %}
+        </ul>
+    </div>
+    <div class='flex justify-content-center mt-4'>
+        <form class='d-flex justify-content-center mt-2 px-5' method='POST'>
+            {% csrf_token %}
+            {{ replyform }}
+            <br />
+            <div class='d-flex justify-content-center'>
+            <button class='btn btn-dark mt-2 mb-3' id="add-reply-button" type="submit">Submit</button>
+        </form>
+    </div>
+    <p class='mt-3'><a class='text-decoration-none' href="/building/{{ building.id }}/">Back to Building Page</a></p>
 {% endblock %}

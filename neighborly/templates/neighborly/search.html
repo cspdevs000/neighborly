@@ -2,9 +2,9 @@
 
 {% block content %}
 {% if searched %}
-<h1 class='mt-3'>You searched for {{ searched }}</h1>
+<h2 class='mt-3'>You searched for {{ searched }}</h2>
 <br />
-    {% if result %}
+    {% if results %}
     <ul>
         {% for result in results %}
         <div class='d-flex justify-content-center p-3'>

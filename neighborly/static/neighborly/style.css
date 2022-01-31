@@ -1,17 +1,10 @@
-* {
-    font-family: 'Rokkitt', serif;
-}
-
 h1, h2, h3, h4, h5, p {
     text-align: center;
+    color: white !important;
 }
 
 a {
-    color:green
-}
-
-a:hover {
-    color:green
+    color:rgb(211, 204, 104)
 }
 
 li {
@@ -26,5 +19,11 @@ li {
 
 .home-header {
     padding: 30px;
+}
+
+#bg {
+    opacity: 0.7;
+    color: white;
+    font-family: 'Rokkitt', serif;
 }
 

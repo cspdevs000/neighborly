@@ -1,15 +1,18 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<div class='flex justify-content-center mt-2'>
-    <h1>POST EDIT PAGE</h1>
-    <p>Post by {{ post.user }}: {{ post.body }} ({{post.pub_date}})</p>
-<div class='add-comment-container'>
-    <form method='POST'>
-        {% csrf_token %}
-        {{ form }}
-        <br />
-        <button id="add-reply-button" type="submit">submit</button>
-    </form>
+<div class='flex justify-content-center mt-2 btn btn-dark'>
+    <div class='justify-content-center'>
+        <h1>Edit Post</h1>
+        <b>Post by {{ post.user }}: {{ post.body }} ({{post.pub_date}})</p>
+        <div class='d-flex justify-content-center'>
+            <form method='POST' label=''>
+                {% csrf_token %}
+                {{ form }}
+                <br />
+                <button id="add-reply-button" type="submit">submit</button>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

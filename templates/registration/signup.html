@@ -6,7 +6,7 @@
 
 <p>Already have an account? Then please <a href="{% url 'login'%}">sign in</a>.</p>
 
-<div class='shadow p-5 mb-5 bg-body rounded'>
+<div class='shadow p-5 mb-5 rounded'>
 <form id="signup_form" method="post">
   {% csrf_token %}
   {{ form.as_p }}

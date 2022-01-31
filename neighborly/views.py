@@ -270,12 +270,20 @@ class AddOccupantsView(View):
 
 
 #todo
-#change navbar search to be for users or something else
-#add send invitation functionality for building admin
+#find / add background image
+#find / replace navbar dropdown icon
+#change font?
+#decipher replies styling on building page
+#try to figure out how to remove occupant association upon leaving building
+#deploy
+#add to portfolio
+#fix portfolio redirect
+#add portfolio url to resume
+#post likes?
+#DMs?
+
+#stretch goals
+#add search user / send invitation functionality for building admin
 #handle creator leaving building
 #pinned posts
 #fix default photo in cloudinary
-
-#style home page
-#style building page / posts & replies
-#clean up signup / login / logout pages

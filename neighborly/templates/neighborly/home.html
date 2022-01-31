@@ -4,7 +4,7 @@
 <div class="bg-gradient-dark text-dark">
 {% comment %} <div class='has-bg-img bg-purple bg-blend-multiply'> {% endcomment %}
   {% comment %} <img class='bg-img' src='../static/neighborly/images/bkgd7.jpeg' alt=''> {% endcomment %}
-  <div class='home-header mt-1'>
+  <div class='home-header mt-2'>
     <h1>Neighborly</h1>
   </div>
   {% if building %}
@@ -24,9 +24,9 @@
     </div>
     <div class='flex justify-content-center'>
       <h3>Search for your building below...</h3>
-      <form class="flex justify-content-center p-3" method="POST" action="{% url 'search' %}">
+      <form class="d-flex justify-content-center px-4 mt-2" method="POST" action="{% url 'search' %}">
         {% csrf_token %}
-        <input class="form-control me-2" type="search" placeholder="Search by address" aria-label="Search" name="searched">
+        <input class="px-4 me-2" type="search" placeholder="Search by address" aria-label="Search" name="searched">
         <br />
         <div class='d-flex justify-content-center p-1 mt-1'>
         <button class="btn btn-outline-success" type="submit">Go</button>
