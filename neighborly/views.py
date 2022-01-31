@@ -259,7 +259,7 @@ class AddOccupantsView(View):
     def get(self, request, building_id, *args, **kwargs):
         building = get_object_or_404(Building, pk=building_id)
         occupants = ExtendUser.objects.filter(occupants = building_id)
-        print('occupants~!! --->', occupants[0].user_id)
+        # print('occupants~!! --->', occupants[0].user_id)
         requests = AddRequest.objects.all()
         context = {
             'occupants': occupants,
@@ -270,12 +270,10 @@ class AddOccupantsView(View):
 
 
 #todo
-#find / add background image
 #find / replace navbar dropdown icon
 #change font?
-#decipher replies styling on building page
 #try to figure out how to remove occupant association upon leaving building
-#deploy
+#add delete user to building admin page
 #add to portfolio
 #fix portfolio redirect
 #add portfolio url to resume
