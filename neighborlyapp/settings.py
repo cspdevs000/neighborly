@@ -27,7 +27,7 @@ SECRET_KEY = 'supersecretneighborlyappsessionkey'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://neighborly-application.herokuapp.com/']
 
 
 # Application definition
@@ -82,7 +82,11 @@ WSGI_APPLICATION = 'neighborlyapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'neighborlyapp',
+        'NAME': 'ddhiajl710pc3o',
+        'HOST': 'ec2-34-230-198-12.compute-1.amazonaws.com',
+        'PORT': '5432',
+        'USER': 'tvxosyqsxoukrf',
+        'PASSWORD' : '92732019c677334ae3c2d86fd842f91ed1048625b38d7a8b2fcc9b70c01685f6'
     }
 }
 
@@ -129,6 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
