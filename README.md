@@ -6,4 +6,4 @@ Users can request to join an already existing building page, or create one of th
 ## wireframe
 
 ## ERD
-![ERD](./img/NeighborlyERD)
+![ERD](./img/NeighborlyERD.png)
