@@ -34,9 +34,7 @@ def search(request):
     if request.method == 'POST':
         searched = request.POST['searched']
         results = Building.objects.filter(address__icontains=searched)
-        print('RESULTS', results)
-        admins = Building.objects.filter(address__icontains=searched).values('creator_id')
-        print('ADMINS', admins)
+        admins = results.values('creator_id')
         context = {
             'searched': searched,
             'results': results,
