@@ -25,5 +25,13 @@ li {
     opacity: 0.7;
     color: white;
     font-family: 'Rokkitt', serif;
+    background-size: 1800px 900px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
